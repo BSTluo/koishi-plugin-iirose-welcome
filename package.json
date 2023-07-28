@@ -1,0 +1,21 @@
+{
+  "name": "koishi-plugin-iirose-welcome",
+  "description": "适用于的[IIROSE蔷薇花园](https://iirose.com/)(可能也支持其他平台？)的进群/进房间欢迎插件！",
+  "version": "0.0.1",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "files": [
+    "lib",
+    "dist"
+  ],
+  "license": "MIT",
+  "scripts": {},
+  "keywords": [
+    "chatbot",
+    "koishi",
+    "plugin"
+  ],
+  "peerDependencies": {
+    "koishi": "4.13.8"
+  }
+}

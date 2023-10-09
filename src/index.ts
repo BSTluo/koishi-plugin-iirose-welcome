@@ -72,7 +72,7 @@ export function apply(ctx: Context, config: Config) {
   })
 
   if (config.fit) {
-    ctx.on('guild-added', session => {
+    ctx.on('guild-member-added', session => {
       if (!config.private) {
         session.send(getWelcome(config, session.username))
       } else {
@@ -80,7 +80,7 @@ export function apply(ctx: Context, config: Config) {
       }
     })
 
-    ctx.on('guild-deleted', session => {
+    ctx.on('guild-member-removed', session => {
       if (!config.private) {
         session.send(getExit(config, session.username))
       } else {

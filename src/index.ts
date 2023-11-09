@@ -36,34 +36,34 @@ const getExit = (config: Config, username: string) => {
 }
 
 export function apply(ctx: Context, config: Config) {
-  ctx.on('iirose/joinRoom', (session, data) => {
+  ctx.on('iirose/joinRoom', (session) => {
     if (!config.private) {
       session.send({
         public: {
-          message: getWelcome(config, data.username)
+          message: getWelcome(config, session.data.username)
         }
       })
     } else {
       session.send({
         private: {
-          message: getWelcome(config, data.username),
+          message: getWelcome(config, session.data.username),
           userId: session.author.userId
         }
       })
     }
   })
 
-  ctx.on('iirose/leaveRoom', (session, data) => {
+  ctx.on('iirose/leaveRoom', (session) => {
     if (!config.private) {
       session.send({
         public: {
-          message: getExit(config, data.username)
+          message: getExit(config, session.data.username)
         }
       })
     } else {
       session.send({
         private: {
-          message: getExit(config, data.username),
+          message: getExit(config, session.data.username),
           userId: session.author.userId
         }
       })

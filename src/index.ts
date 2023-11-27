@@ -22,7 +22,9 @@ export const Config: Schema<Config> = Schema.intersect([
 ]);
 
 const getWelcome = (config: Config, username: string) => {
-  const index = Random.real(0, config.welcomeList.length - 1);
+  const random = new Random(() => Math.random())
+  const index = random.int(0, config.welcomeList.length - 1);
+  
   const welcomeMsg = config.welcomeList[index];
 
   const msg = (/@/.test(welcomeMsg)) ? welcomeMsg.replace('(@)', `<at id="${username}"/>`) : welcomeMsg;
@@ -30,7 +32,9 @@ const getWelcome = (config: Config, username: string) => {
 };
 
 const getExit = (config: Config, username: string) => {
-  const index = Random.real(0, config.exitList.length - 1);
+  const random = new Random(() => Math.random())
+  const index = random.int(0, config.exitList.length - 1);
+
   const exitMsg = config.exitList[index];
   
   const msg = (/@/.test(exitMsg)) ? exitMsg.replace('(@)', `<at id="${username}"/>`) : exitMsg;
@@ -40,7 +44,7 @@ const getExit = (config: Config, username: string) => {
 export function apply(ctx: Context, config: Config) {
   ctx.on('iirose/joinRoom', (session) => {
     if (config.welcomeList.length <= 0) { return }
-
+    
     if (!config.private) {
       session.send({
         public: {

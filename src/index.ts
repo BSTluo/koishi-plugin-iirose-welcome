@@ -27,7 +27,7 @@ const getWelcome = (config: Config, username: string) => {
   
   const welcomeMsg = config.welcomeList[index];
 
-  const msg = (/@/.test(welcomeMsg)) ? welcomeMsg.replace('(@)', `<at id="${username}"/>`) : welcomeMsg;
+  const msg = (/@/.test(welcomeMsg)) ? welcomeMsg.replace('(@)', `<at name="${username}"/>`) : welcomeMsg;
   return msg;
 };
 
@@ -37,7 +37,7 @@ const getExit = (config: Config, username: string) => {
 
   const exitMsg = config.exitList[index];
   
-  const msg = (/@/.test(exitMsg)) ? exitMsg.replace('(@)', `<at id="${username}"/>`) : exitMsg;
+  const msg = (/@/.test(exitMsg)) ? exitMsg.replace('(@)', `<at name="${username}"/>`) : exitMsg;
   return msg;
 };
 

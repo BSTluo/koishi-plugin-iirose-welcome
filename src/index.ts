@@ -23,7 +23,7 @@ export const Config: Schema<Config> = Schema.intersect([
 
 const getWelcome = (config: Config, username: string) => {
   const random = new Random(() => Math.random())
-  const index = random.int(0, config.welcomeList.length - 1);
+  const index = random.int(0, config.welcomeList.length);
   
   const welcomeMsg = config.welcomeList[index];
 
@@ -33,7 +33,7 @@ const getWelcome = (config: Config, username: string) => {
 
 const getExit = (config: Config, username: string) => {
   const random = new Random(() => Math.random())
-  const index = random.int(0, config.exitList.length - 1);
+  const index = random.int(0, config.exitList.length);
 
   const exitMsg = config.exitList[index];
   

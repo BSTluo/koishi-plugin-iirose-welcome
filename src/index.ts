@@ -46,18 +46,9 @@ export function apply(ctx: Context, config: Config) {
     if (config.welcomeList.length <= 0) { return }
     
     if (!config.private) {
-      session.send({
-        public: {
-          message: getWelcome(config, session.data.username)
-        }
-      });
+      session.bot.sendMessage('public:',getWelcome(config, session.username))
     } else {
-      session.send({
-        private: {
-          message: getWelcome(config, session.data.username),
-          userId: session.author.userId
-        }
-      });
+      session.bot.sendMessage(`private:${session.userId}`, getWelcome(config, session.username));
     }
   });
 
@@ -65,18 +56,9 @@ export function apply(ctx: Context, config: Config) {
     if (config.exitList.length <= 0) { return }
     
     if (!config.private) {
-      session.send({
-        public: {
-          message: getExit(config, session.data.username)
-        }
-      });
+      session.bot.sendMessage('public:',getExit(config, session.username))
     } else {
-      session.send({
-        private: {
-          message: getExit(config, session.data.username),
-          userId: session.author.userId
-        }
-      });
+      session.bot.sendMessage(`private:${session.userId}`, getExit(config, session.username));
     }
 
   });

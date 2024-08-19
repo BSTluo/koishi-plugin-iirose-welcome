@@ -42,7 +42,7 @@ export function apply(ctx: Context, config: Config)
   {
     const getMsgTemp = await ctx.database.get('iirose_welcome', { uid: session.userId });
 
-    const getMsg = getMsgTemp.length > 0 ? getMsgTemp[0].leaveMsg : null;
+    const getMsg = getMsgTemp.length > 0 ? getMsgTemp[0].welcomeMsg : null;
 
     if (getMsg && getMsg != '')
     {
@@ -65,7 +65,7 @@ export function apply(ctx: Context, config: Config)
   {
     const getMsgTemp = await ctx.database.get('iirose_welcome', { uid: session.userId });
 
-    const getMsg = getMsgTemp.length > 0 ? getMsgTemp[0].welcomeMsg : null;
+    const getMsg = getMsgTemp.length > 0 ? getMsgTemp[0].leaveMsg : null;
 
     if (getMsg && getMsg != '')
     {
@@ -95,13 +95,13 @@ export function apply(ctx: Context, config: Config)
   {
     if (config.welcomeList.length <= 0) { return; }
     if (session.userId == session.bot.user.id || session.userId == session.bot.selfId) { return; }
-
+        const sess = session as unknown as Session
     if (!config.private)
     {
-      session.bot.sendMessage('public:', await getWelcome(config, session.username, session));
+      session.bot.sendMessage('public:', await getWelcome(config, session.data.username, sess));
     } else
     {
-      session.bot.sendMessage(`private:${session.userId}`, await getWelcome(config, session.username, session));
+      session.bot.sendMessage(`private:${session.userId}`, await getWelcome(config, session.data.username, sess));
     }
   });
 
@@ -110,12 +110,13 @@ export function apply(ctx: Context, config: Config)
     if (config.exitList.length <= 0) { return; }
     if (session.userId == session.bot.user.id || session.userId == session.bot.selfId) { return; }
 
+    const sess = session as unknown as Session
     if (!config.private)
     {
-      session.bot.sendMessage('public:', await getExit(config, session.username, session));
+      session.bot.sendMessage('public:', await getExit(config, session.data.username, sess));
     } else
     {
-      session.bot.sendMessage(`private:${session.userId}`, await getExit(config, session.username, session));
+      session.bot.sendMessage(`private:${session.userId}`, await getExit(config, session.data.username, sess));
     }
 
   });

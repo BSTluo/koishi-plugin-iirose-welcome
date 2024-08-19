@@ -2,7 +2,7 @@ import { Context, Schema, Random, h, Session } from 'koishi';
 import { } from 'koishi-plugin-adapter-iirose';
 
 export const name = 'iirose-welcome';
-
+export const inject = ['database']
 export interface Config
 {
   fit: boolean;
@@ -98,10 +98,10 @@ export function apply(ctx: Context, config: Config)
 
     if (!config.private)
     {
-      session.bot.sendMessage('public:', await getWelcome(config, session.data.username, session.userId));
+      session.bot.sendMessage('public:', await getWelcome(config, session.username, session.userId));
     } else
     {
-      session.bot.sendMessage(`private:${session.userId}`, await getWelcome(config, session.data.username, session.userId));
+      session.bot.sendMessage(`private:${session.userId}`, await getWelcome(config, session.username, session.userId));
     }
   });
 
@@ -112,10 +112,10 @@ export function apply(ctx: Context, config: Config)
 
     if (!config.private)
     {
-      session.bot.sendMessage('public:', await getExit(config, session.data.username, session.userId));
+      session.bot.sendMessage('public:', await getExit(config, session.username, session.userId));
     } else
     {
-      session.bot.sendMessage(`private:${session.userId}`, await getExit(config, session.data.username, session.userId));
+      session.bot.sendMessage(`private:${session.userId}`, await getExit(config, session.username, session.userId));
     }
 
   });

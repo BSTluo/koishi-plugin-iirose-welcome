@@ -91,31 +91,31 @@ export function apply(ctx: Context, config: Config)
     primary: 'uid'
   });
 
-  ctx.on('iirose/joinRoom', async (session) =>
+  ctx.on('iirose/joinRoom', async (session, data) =>
   {
     if (config.welcomeList.length <= 0) { return; }
     if (session.userId == session.bot.user.id || session.userId == session.bot.selfId) { return; }
 
     if (!config.private)
     {
-      session.bot.sendMessage('public:', await getWelcome(config, session.username, session.userId));
+      session.bot.sendMessage('public:', await getWelcome(config, data.username, data.uid));
     } else
     {
-      session.bot.sendMessage(`private:${session.userId}`, await getWelcome(config, session.username, session.userId));
+      session.bot.sendMessage(`private:${session.userId}`, await getWelcome(config, data.username, data.uid));
     }
   });
 
-  ctx.on('iirose/leaveRoom', async (session) =>
+  ctx.on('iirose/leaveRoom', async (session, data) =>
   {
     if (config.exitList.length <= 0) { return; }
     if (session.userId == session.bot.user.id || session.userId == session.bot.selfId) { return; }
 
     if (!config.private)
     {
-      session.bot.sendMessage('public:', await getExit(config, session.username, session.userId));
+      session.bot.sendMessage('public:', await getExit(config, data.username, data.uid));
     } else
     {
-      session.bot.sendMessage(`private:${session.userId}`, await getExit(config, session.username, session.userId));
+      session.bot.sendMessage(`private:${session.userId}`, await getExit(config, data.username, data.uid));
     }
 
   });

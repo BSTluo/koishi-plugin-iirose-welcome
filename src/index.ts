@@ -153,7 +153,7 @@ export function apply(ctx: Context, config: Config)
 
   ctx.command('iirose', '花园工具');
 
-  ctx.command("iirose.wb.set <message>", '设置自己的专属欢迎词').action(async (v, message) =>
+  ctx.command("iirose.wb.set <message:text>", '设置自己的专属欢迎词').action(async (v, message) =>
   {
     if (v.session.platform != 'iirose') { return; }
     if (!message) { return `<at name="${v.session.username}"/>你没有设置欢迎词`; }
@@ -180,7 +180,7 @@ export function apply(ctx: Context, config: Config)
     return `<at name="${v.session.username}"/>删除成功`;
   });
 
-  ctx.command("iirose.lr.set <message>", '设置自己的专属送别词').action(async (v, message) =>
+  ctx.command("iirose.lr.set <message:text>", '设置自己的专属送别词').action(async (v, message) =>
   {
     if (v.session.platform != 'iirose') { return; }
     if (!message) { return `<at name="${v.session.username}"/>你没有设置欢迎词`; }
